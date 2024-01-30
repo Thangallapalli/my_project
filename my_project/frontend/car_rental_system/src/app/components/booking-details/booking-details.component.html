@@ -1,0 +1,59 @@
+<div class="container-fluid mt-5 pt-5">
+
+    <div class="row justify-content-center">
+        <div class="col-8">
+        <div *ngIf="carBookings.length>0">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>SNO.</th>
+                    <th>IMAGE</th>
+                    <th>MODEL</th>
+                    <th>RENT DAYS</th>
+                </tr>
+            </thead>
+                <tbody>
+                    <tr *ngFor=" let carBooking of carBookings; index as i">
+                        <td>
+                            {{i +1}}
+                        </td>
+                        <td>
+                            <img [src]="carBooking.imageUrl" [alt]="carBooking.imageUrl" width="150px" />
+                        </td>
+                        <td>
+                            <p>{{ carBooking.model}}</p>
+
+                        </td>
+                        <td>
+                            <div>
+                                <p>RENT DAYS: {{carBooking.rentDays}}</p>
+                                <button class="btn btn-primary btn-sm mx-2" (click)="incrementDays(carBooking)"><i class="fa-sharp fa-solid fa-plus fa-beat" style="color: #1b2723;"></i></button>
+                            
+                                <button  class="btn btn-primary btn-sm mx-2" (click)="decrementDays(carBooking)"><i class="fa-sharp fa-solid fa-minus fa-beat-fade"></i></button>
+                            </div>
+                            <p>
+                                Subtotal:
+                                {{ carBooking.rentDays*carBooking.rentPrice | currency: "INR"}}
+                            </p>
+                            <button class="btn" (click)="remove(carBooking)"><i class="fa-solid fa-trash fa-bounce" style="color: #1a0f10;"></i></button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="3"></td>
+                        <td style="font-weight: bold;">
+                            <p>Total DAYS: {{totalDays}}</p>
+                            <p>Total Price: {{totalPrice | currency:"INR"}}</p>
+                            <a routerLink="/rentCar" class="btn btn-success">Rent Car</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+        
+            <div *ngIf="carBookings.length == 0" class="alert alert-warning">Booking Is Empty</div>
+        </div>
+    </div>
+</div>
+</div>
